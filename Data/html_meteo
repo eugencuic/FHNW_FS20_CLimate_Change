@@ -1,0 +1,161 @@
+<table id="stations-table" summary=""
+    data-elements="[&quot;station.name&quot;,&quot;station.code&quot;,&quot;station.height&quot;,&quot;station.region&quot;,&quot;station.assets.documents&quot;]"
+    class="dataTable no-footer" role="grid">
+    <thead>
+        <tr role="row">
+            <th id="station.name" class="sorting_asc" scope="col" tabindex="0" aria-controls="stations-table"
+                rowspan="1" colspan="1" style="width: 0px;" aria-sort="ascending"
+                aria-label="Name absteigend sortieren.">Name</th>
+            <th id="station.code" class="sorting" scope="col" tabindex="0" aria-controls="stations-table" rowspan="1"
+                colspan="1" style="width: 0px;" aria-label="Abk. absteigend sortieren.">Abk.</th>
+            <th id="station.height" class="right sorting" scope="col" tabindex="0" aria-controls="stations-table"
+                rowspan="1" colspan="1" style="width: 0px;" aria-label="Höhe absteigend sortieren.">Höhe</th>
+            <th id="station.region" class="sorting" scope="col" tabindex="0" aria-controls="stations-table" rowspan="1"
+                colspan="1" style="width: 0px;" aria-label="Klimaregion absteigend sortieren.">Klimaregion</th>
+            <th id="station.assets.documents[0]" class="no-sort sorting_disabled" scope="col" rowspan="1" colspan="1"
+                style="width: 0px;" aria-label=""></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr role="row" class="odd selected">
+            <th scope="row" class="sorting_1">Basel / Binningen</th>
+            <td>BAS</td>
+            <td class=" right">316 m. ü. M.</td>
+            <td>Östlicher Jura</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_BAS.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_BAS <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="even">
+            <th scope="row" class="sorting_1">Bern / Zollikofen</th>
+            <td>BER</td>
+            <td class=" right">553 m. ü. M.</td>
+            <td>Zentrales Mittelland</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_BER.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_BER <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="odd">
+            <th scope="row" class="sorting_1">Chaumont</th>
+            <td>CHM</td>
+            <td class=" right">1136 m. ü. M.</td>
+            <td>Westlicher Jura</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_CHM.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_CHM <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="even">
+            <th scope="row" class="sorting_1">Château-d'Oex</th>
+            <td>CHD</td>
+            <td class=" right">1029 m. ü. M.</td>
+            <td>Westlicher Alpennordhang</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_CHD.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_CHD <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="odd">
+            <th scope="row" class="sorting_1">Col du Grand St-Bernard</th>
+            <td>GSB</td>
+            <td class=" right">2472 m. ü. M.</td>
+            <td>Alpensüdseite</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_GSB.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_GSB <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="even">
+            <th scope="row" class="sorting_1">Davos</th>
+            <td>DAV</td>
+            <td class=" right">1594 m. ü. M.</td>
+            <td>Nord- und Mittelbünden</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_DAV.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_DAV <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="odd">
+            <th scope="row" class="sorting_1">Engelberg</th>
+            <td>ENG</td>
+            <td class=" right">1036 m. ü. M.</td>
+            <td>Zentraler Alpennordhang</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_ENG.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_ENG <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="even">
+            <th scope="row" class="sorting_1">Genève-Cointrin</th>
+            <td>GVE</td>
+            <td class=" right">412 m. ü. M.</td>
+            <td>Westliches Mittelland</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_GVE.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_GVE <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="odd">
+            <th scope="row" class="sorting_1">Lugano</th>
+            <td>LUG</td>
+            <td class=" right">273 m. ü. M.</td>
+            <td>Alpensüdseite</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_LUG.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_LUG <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="even">
+            <th scope="row" class="sorting_1">Payerne</th>
+            <td>PAY</td>
+            <td class=" right">490 m. ü. M.</td>
+            <td>Westliches Mittelland</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_PAY.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_PAY <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="odd">
+            <th scope="row" class="sorting_1">Segl-Maria</th>
+            <td>SIA</td>
+            <td class=" right">1804 m. ü. M.</td>
+            <td>Engadin</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_SIA.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_SIA <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="even">
+            <th scope="row" class="sorting_1">Sion</th>
+            <td>SIO</td>
+            <td class=" right">482 m. ü. M.</td>
+            <td>Wallis</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_SIO.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_SIO <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="odd">
+            <th scope="row" class="sorting_1">Säntis</th>
+            <td>SAE</td>
+            <td class=" right">2502 m. ü. M.</td>
+            <td>Östlicher Alpennordhang</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_SAE.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_SAE <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+        <tr role="row" class="even">
+            <th scope="row" class="sorting_1">Zürich / Fluntern</th>
+            <td>SMA</td>
+            <td class=" right">556 m. ü. M.</td>
+            <td>Nordöstliches Mittelland</td>
+            <td><span class="overflow"><a
+                        href="/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_SMA.txt"
+                        target="_blank" lang="en"><span data-icon="d" aria-hidden="true"></span> homog_mo_SMA <span
+                            class="docinfo">(TXT, DE)</span></a></span></td>
+        </tr>
+    </tbody>
+</table>
