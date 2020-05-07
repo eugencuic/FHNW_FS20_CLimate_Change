@@ -31,7 +31,7 @@ content = zipfile.ZipFile(io.BytesIO(get_data.content))
 data_folder = content.extractall()
 
 #Load Data into Pandas DataFrame
-raw_data = pd.read_csv('PLZO_CSV_WGS84/PLZO_CSV_WGS84.csv', sep=';', engine='python')
+raw_data = pd.read_csv('PLZO_CSV_WGS84/PLZO_CSV_WGS84.csv', sep=';', encoding='latin-1')
 
 #Just take those columns that are needed
 raw_data = raw_data[['Ortschaftsname', 'PLZ', 'E', 'N']]
@@ -41,11 +41,6 @@ koord_data = raw_data.rename(columns={
     'E' : 'Longitude', 
     'N' : 'Latitude'}
     )
-
-#Replace all ä,ö,ü with ae, oe, ue
-#koord_data = koord_data.replace('ä', 'ae', regex=True)
-#koord_data = koord_data.replace('ö', 'oe', regex=True)
-#koord_data = koord_data.replace('ü', 'ue', regex=True)
 
 #Create Connection Engine
 database_username ='climate_change'
@@ -60,12 +55,6 @@ database_connection = sqlalchemy.create_engine('mysql+mysqlconnector://{0}:{1}@{
 
 #Evoke Connection
 con = database_connection.connect()
-
-#Set Encoding to utf8 due to missbehaviour without
-utf8 = text("""
-SET NAMES 'utf8';
-""")
-con.execute(utf8)
 
 #Drop all Data from Database
 delet_rows = text("""
