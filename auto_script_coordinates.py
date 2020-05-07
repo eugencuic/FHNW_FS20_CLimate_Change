@@ -43,9 +43,9 @@ koord_data = raw_data.rename(columns={
     )
 
 #Replace all ä,ö,ü with ae, oe, ue
-koord_data = koord_data.replace('ä', 'ae', regex=True)
-koord_data = koord_data.replace('ö', 'oe', regex=True)
-koord_data = koord_data.replace('ü', 'ue', regex=True)
+#koord_data = koord_data.replace('ä', 'ae', regex=True)
+#koord_data = koord_data.replace('ö', 'oe', regex=True)
+#koord_data = koord_data.replace('ü', 'ue', regex=True)
 
 #Create Connection Engine
 database_username ='climate_change'
@@ -60,6 +60,12 @@ database_connection = sqlalchemy.create_engine('mysql+mysqlconnector://{0}:{1}@{
 
 #Evoke Connection
 con = database_connection.connect()
+
+#Set Encoding to utf8 due to missbehaviour without
+utf8 = text("""
+SET NAMES 'utf8';
+""")
+con.execute(utf8)
 
 #Drop all Data from Database
 delet_rows = text("""
