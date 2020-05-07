@@ -42,6 +42,11 @@ koord_data = raw_data.rename(columns={
     'N' : 'Latitude'}
     )
 
+#Replace all ä,ö,ü with ae, oe, ue
+koord_data = koord_data.replace('ä', 'ae', regex=True)
+koord_data = koord_data.replace('ö', 'oe', regex=True)
+koord_data = koord_data.replace('ü', 'ue', regex=True)
+
 #Create Connection Engine
 database_username ='climate_change'
 database_password = 'FHNW_climate_20'
@@ -53,7 +58,6 @@ database_connection = sqlalchemy.create_engine('mysql+mysqlconnector://{0}:{1}@{
                                                       database_ip, database_name))
 
 
-
 #Evoke Connection
 con = database_connection.connect()
 
@@ -61,9 +65,7 @@ con = database_connection.connect()
 delet_rows = text("""
 DELETE FROM Climate_Change.coordinates;
 """)
-
 con.execute(delet_rows)
 
 #Send Data to Database
 koord_data.to_sql(con=database_connection, name='coordinates', if_exists='replace')
-
