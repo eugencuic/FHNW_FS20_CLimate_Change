@@ -4,6 +4,7 @@ import requests
 from pathlib import Path
 from netCDF4 import Dataset
 from bs4 import BeautifulSoup
+import os
 
 def get_location():
     #Get the current IP adress of the user
@@ -19,12 +20,10 @@ def get_location():
 #Funktion um die Temperatur an einer Koordinate zu erhalten
 def get_temp (lon_location, lat_location):
 
-    TabsM_folder = Path("TabsM_1961_2017_ch01r.swisscors")
-
     def find_temperatur(year,min_index_lon,min_index_lat):
 
         #open file
-        path = TabsM_folder/"TabsM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc".format(Y=year)
+        path = os.path.join(os.path.expanduser('~'),'climate_change','TabsM_1961_2017_ch01r.swisscors','TabsM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=year)
         meteoswiss_data = Dataset(path)
 
         #creating a List and adding the Value of the same messurment point to it
@@ -40,7 +39,7 @@ def get_temp (lon_location, lat_location):
         return(timeseries)
 
 
-    path = TabsM_folder/"TabsM_ch01r.swisscors_196101010000_196112010000.nc"
+    path = os.path.join(os.path.expanduser('~'),'climate_change','TabsM_1961_2017_ch01r.swisscors','TabsM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=1961)
     meteoswiss_data = Dataset(path)
 
     # read latitutde and longitude variable
@@ -73,12 +72,10 @@ def get_temp (lon_location, lat_location):
 #Funktion um den Niederschlag in einer Koordinate zu erhalten
 def get_precipitation (lon_location, lat_location):
 
-    RhiresM_folder = Path("RhiresM_1961_2019_ch01r.swisscors")
-
     def find_precipitation(year,min_index_lon,min_index_lat):
 
         #open file
-        path = RhiresM_folder/"RhiresM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc".format(Y=year)
+        path = os.path.join(os.path.expanduser('~'),'climate_change','RhiresM_1961_2019_ch01r.swisscors','RhiresM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=year)
         meteoswiss_data = Dataset(path)
 
         #creating a List and adding the Value of the same messurment point to it
@@ -93,7 +90,7 @@ def get_precipitation (lon_location, lat_location):
         meteoswiss_data.close()
         return(timeseries)
 
-    path = RhiresM_folder/"RhiresM_ch01r.swisscors_196101010000_196112010000.nc"
+    path = os.path.join(os.path.expanduser('~'),'climate_change','RhiresM_1961_2019_ch01r.swisscors','RhiresM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=1961)
     meteoswiss_data = Dataset(path)
 
     # read latitutde and longitude variable
