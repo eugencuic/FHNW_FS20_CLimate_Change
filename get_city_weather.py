@@ -1,7 +1,11 @@
-def get_location():
-    from bs4 import BeautifulSoup
-    import requests
+import pandas as pd
+import numpy.ma as ma
+import requests
+from pathlib import Path
+from netCDF4 import Dataset
+from bs4 import BeautifulSoup
 
+def get_location():
     #Get the current IP adress of the user
     page = requests.get("https://iplocation.com/")
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -14,14 +18,6 @@ def get_location():
 
 #Funktion um die Temperatur an einer Koordinate zu erhalten
 def get_temp (lon_location, lat_location):
-
-
-    import pandas as pd
-    import numpy.ma as ma
-    from pathlib import Path
-
-    from netCDF4 import Dataset
-
 
     TabsM_folder = Path("TabsM_1961_2017_ch01r.swisscors")
 
@@ -76,12 +72,6 @@ def get_temp (lon_location, lat_location):
 
 #Funktion um den Niederschlag in einer Koordinate zu erhalten
 def get_precipitation (lon_location, lat_location):
-
-    import pandas as pd
-    import numpy.ma as ma
-
-    from pathlib import Path
-    from netCDF4 import Dataset
 
     RhiresM_folder = Path("RhiresM_1961_2019_ch01r.swisscors")
 
