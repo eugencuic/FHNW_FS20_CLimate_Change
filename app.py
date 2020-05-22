@@ -13,8 +13,7 @@ import os
 
 #Code für den Server
 
-# Create a connection to the database
-# Create Connection Engine
+# Create the variables and queries required for the database connection, the actual connction will happen in the callback functions
 database_username = 'climate_change'
 database_password = 'FHNW_climate_20'
 database_ip = 'localhost'
@@ -23,13 +22,6 @@ database_name = 'Climate_Change'
 database_connection = sqlalchemy.create_engine('mysql+mysqlconnector://{0}:{1}@{2}/{3}'.
                                                format(database_username, database_password,
                                                       database_ip, database_name))
-
-#Evoke Connection
-con = database_connection.connect()
-
-#Select the needed columns and put them in a pandas dataframe
-select_coordinates = pd.read_sql('SELECT Ortschaftsname, Longitude, Latitude FROM coordinates', con = con)
-
 
 # TODO Define a stylesheet
 # Stylesheet with the pre defined styles for website layout
@@ -184,8 +176,6 @@ app.layout = html.Div(
 def update_figure(selected_year, selected_month, weather):
     image_path = os.path.join(os.path.expanduser('~'),'climate_change','Images','{}_{}_{}.png').format(weather,selected_year,selected_month)
 
-
-
     image_file = open(image_path, 'rb').read()
     encoded_image = (base64.b64encode(image_file))
     return 'data:image/png;base64,{}'.format(encoded_image.decode())
@@ -198,6 +188,12 @@ def update_figure(selected_year, selected_month, weather):
 
 def dropdown_values(one):
 
+    # Evoke Connection
+    con = database_connection.connect()
+
+    # Select the needed columns and put them in a pandas dataframe
+    select_coordinates = pd.read_sql('SELECT Ortschaftsname, Longitude, Latitude FROM coordinates', con=con)
+
     #Get the names of the cities out of the database
     cities = select_coordinates['Ortschaftsname']
 
@@ -206,6 +202,9 @@ def dropdown_values(one):
 
     for city in cities:
         cities_dropdown.append({'label': city, 'value': city})
+
+    # Close the database connection
+    con.close()
 
     return cities_dropdown
 
@@ -221,6 +220,8 @@ def create_graph(city, weather):
     #Choose the coordinate, look if a city already has been entered
     #Change the name of the city into coordinates (the data to do this is stored in the database)
     Sql_query = """SELECT Ortschaftsname, Longitude, Latitude FROM coordinates WHERE Ortschaftsname = %s;"""
+    # Evoke Connection
+    con = database_connection.connect()
     get_coordinates = pd.read_sql(Sql_query, con=con, params=(city,))
     latitude = get_coordinates['Latitude']
     latitude = np.asarray(latitude[0])
@@ -244,6 +245,9 @@ def create_graph(city, weather):
 
 
         Graph = px.line(Temperature, x=Temperature.index, y=Temperature.temperatur.rolling(12).mean(), title = city)
+
+    # Close the database connection
+    con.close()
 
     return Graph
 
