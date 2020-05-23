@@ -233,7 +233,7 @@ def create_graph(city, weather):
         if weather == 'Niederschlag':
 
             #Use the function from the file get city weather in this folder to get the precipitation at this coordinate during every month since 1964
-            Precipitation = get_city_weather_Dash.get_precipitation(longitude, latitude)
+            Precipitation = get_city_weather.get_precipitation(longitude, latitude)
 
             #Plot the graph
             Graph = px.bar(Precipitation, x='Datum', y='Niederschlag', title = city)
@@ -242,7 +242,7 @@ def create_graph(city, weather):
         else:
 
             #Use the function from the file get city weather in this folder to get the temperature at this coordinate during every month since 1964
-            Temperature = get_city_weather_Dash.get_temp(longitude, latitude)
+            Temperature = get_city_weather.get_temp(longitude, latitude)
 
 
             Graph = px.line(Temperature, x=Temperature.index, y=Temperature.temperatur.rolling(12).mean(), title = city)
