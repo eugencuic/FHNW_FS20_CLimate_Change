@@ -148,7 +148,7 @@ app.layout = html.Div(
         html.Div(
             dcc.Dropdown(
                 id='cities-dropdown',
-                value='Bern',
+                placeholder='Wählen Sie eine Stadt',
                 clearable=False),
             style={
                 'margin-left': 50,
@@ -217,37 +217,41 @@ def dropdown_values(one):
 
 def create_graph(city, weather):
 
-    #Choose the coordinate, look if a city already has been entered
-    #Change the name of the city into coordinates (the data to do this is stored in the database)
-    Sql_query = """SELECT Ortschaftsname, Longitude, Latitude FROM coordinates WHERE Ortschaftsname = %s;"""
-    # Evoke Connection
-    con = database_connection.connect()
-    get_coordinates = pd.read_sql(Sql_query, con=con, params=(city,))
-    latitude = get_coordinates['Latitude']
-    latitude = np.asarray(latitude[0])
-    longitude = get_coordinates['Longitude']
-    longitude = np.asarray(longitude[0])
+    if city:
+        #Choose the coordinate, look if a city already has been entered
+        #Change the name of the city into coordinates (the data to do this is stored in the database)
+        Sql_query = """SELECT Ortschaftsname, Longitude, Latitude FROM coordinates WHERE Ortschaftsname = %s;"""
+        # Evoke Connection
+        con = database_connection.connect()
+        get_coordinates = pd.read_sql(Sql_query, con=con, params=(city,))
+        latitude = get_coordinates['Latitude']
+        latitude = np.asarray(latitude[0])
+        longitude = get_coordinates['Longitude']
+        longitude = np.asarray(longitude[0])
 
-    #Look if the temperature or the precipitation was choosen
-    if weather == 'Niederschlag':
+        #Look if the temperature or the precipitation was choosen
+        if weather == 'Niederschlag':
 
-        #Use the function from the file get city weather in this folder to get the precipitation at this coordinate during every month since 1964
-        Precipitation = get_city_weather.get_precipitation(longitude, latitude)
+            #Use the function from the file get city weather in this folder to get the precipitation at this coordinate during every month since 1964
+            Precipitation = get_city_weather_Dash.get_precipitation(longitude, latitude)
 
-        #Plot the graph
-        Graph = px.bar(Precipitation, x='Datum', y='Niederschlag', title = city)
+            #Plot the graph
+            Graph = px.bar(Precipitation, x='Datum', y='Niederschlag', title = city)
 
+
+        else:
+
+            #Use the function from the file get city weather in this folder to get the temperature at this coordinate during every month since 1964
+            Temperature = get_city_weather_Dash.get_temp(longitude, latitude)
+
+
+            Graph = px.line(Temperature, x=Temperature.index, y=Temperature.temperatur.rolling(12).mean(), title = city)
+
+        # Close DB connection
+        con.close()
 
     else:
-
-        #Use the function from the file get city weather in this folder to get the temperature at this coordinate during every month since 1964
-        Temperature = get_city_weather.get_temp(longitude, latitude)
-
-
-        Graph = px.line(Temperature, x=Temperature.index, y=Temperature.temperatur.rolling(12).mean(), title = city)
-
-    # Close the database connection
-    con.close()
+        Graph = px.line()
 
     return Graph
 
