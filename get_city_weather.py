@@ -1,12 +1,12 @@
 import pandas as pd
 import numpy.ma as ma
-import requests
-from pathlib import Path
 from netCDF4 import Dataset
-from bs4 import BeautifulSoup
 import os
+from bs4 import BeautifulSoup
+import requests
 
 def get_location():
+
     #Get the current IP adress of the user
     page = requests.get("https://iplocation.com/")
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -23,7 +23,7 @@ def get_temp (lon_location, lat_location):
     def find_temperatur(year,min_index_lon,min_index_lat):
 
         #open file
-        path = os.path.join(os.path.expanduser('~'),'climate_change','TabsM_1961_2017_ch01r.swisscors','TabsM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=year)
+        path = os.path.join(os.path.expanduser('~'), 'climate_change', 'TabsM_1961_2017_ch01r.swisscors', 'TabsM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=year)
         meteoswiss_data = Dataset(path)
 
         #creating a List and adding the Value of the same messurment point to it
@@ -38,8 +38,7 @@ def get_temp (lon_location, lat_location):
         
         return(timeseries)
 
-
-    path = os.path.join(os.path.expanduser('~'),'climate_change','TabsM_1961_2017_ch01r.swisscors','TabsM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=1961)
+    path = os.path.join(os.path.expanduser('~'), 'climate_change', 'TabsM_1961_2017_ch01r.swisscors', 'TabsM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=1961)
     meteoswiss_data = Dataset(path)
 
     # read latitutde and longitude variable
@@ -72,10 +71,12 @@ def get_temp (lon_location, lat_location):
 #Funktion um den Niederschlag in einer Koordinate zu erhalten
 def get_precipitation (lon_location, lat_location):
 
+
     def find_precipitation(year,min_index_lon,min_index_lat):
 
         #open file
-        path = os.path.join(os.path.expanduser('~'),'climate_change','RhiresM_1961_2019_ch01r.swisscors','RhiresM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=year)
+        path = os.path.join(os.path.expanduser('~'), 'climate_change', 'RhiresM_1961_2019_ch01r.swisscors', 'RhiresM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=year)
+
         meteoswiss_data = Dataset(path)
 
         #creating a List and adding the Value of the same messurment point to it
@@ -90,7 +91,8 @@ def get_precipitation (lon_location, lat_location):
         meteoswiss_data.close()
         return(timeseries)
 
-    path = os.path.join(os.path.expanduser('~'),'climate_change','RhiresM_1961_2019_ch01r.swisscors','RhiresM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=1961)
+    path = os.path.join(os.path.expanduser('~'), 'climate_change', 'TabsM_1961_2017_ch01r.swisscors', 'TabsM_ch01r.swisscors_{Y}01010000_{Y}12010000.nc').format(Y=1961)
+
     meteoswiss_data = Dataset(path)
 
     # read latitutde and longitude variable
@@ -114,9 +116,5 @@ def get_precipitation (lon_location, lat_location):
     data_range = pd.date_range(start = '1961', end= '2020', freq='M')
 
     #creating a panda with the precipitation for the city
-    Datum = data_range.to_frame(index=False, name='Datum')
-    Niederschlag = pd.DataFrame(precipitation_year, columns=['Niederschlag'])
-    Table = pd.concat([Datum, Niederschlag], axis=1)
-    return(Table)
-
-# TODO Balkendiagramm bei Niederschlag
+    Niederschlag = pd.DataFrame(precipitation_year, columns=['Niederschlag'], index=data_range)
+    return(Niederschlag)
