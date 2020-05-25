@@ -38,7 +38,7 @@ app.layout = dbc.Container(
                         [
                             html.Div(
                                 html.H1(
-                                    'Webseite des Projektes Climate Change des Studienganges Data Science der FHNW',
+                                    'Webseite des Projektes Climate Change des Studiengangs Data Science der FHNW',
                                     style={
                                         'textAlign': 'center',
                                         'margin': 20
@@ -54,21 +54,38 @@ app.layout = dbc.Container(
                     dbc.Col(
                         [
                             html.Div(
-                                dcc.Markdown(
-                                    'Auf dieser Webseite finden Sie Grafiken, welche den Klimawandel visualisieren und auf welcher Sie'
-                                    'Informationen über das Klima in der Schweiz finden können. '
-                                    'Speziell richtet sich diese Seite an Weinbauern oder Personen die sich für Wein interessieren und welche'
-                                    'Auswirkungen das Klima auf Weintrauben hat. '
-                                    ''
-                                    'Im folgenden wird die Auswirkung der Klimaveränderung auf den Wein/Weintrauben kurz beschrieben.',
-                                    style={
-                                        'margin': 20
-                                    }
-                                )
+                                dcc.Markdown('''
+                                    Auf dieser Webseite finden Sie Grafiken, welche den Klimawandel visualisieren und auf welcher Sie 
+                                    Informationen über das Klima in der Schweiz finden können.  
+
+                                    Speziell richtet sich diese Seite an Weinbauern oder Personen die sich für Wein interessieren und welche 
+                                    Auswirkungen das Klima auf Weintrauben hat. 
+                                    Im folgenden wird die Auswirkung der Klimaveränderung auf den Wein/Weintrauben kurz beschrieben:  
+
+                                    *Kurzerklärung*
+                                    ''',
+                                             style={
+                                                 'margin': 30
+                                             }
+                                             )
                             )
                         ]
                     ),
                 ]
+            ),
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [
+                            html.H2(
+                                'Gesamtübersicht Schweiz des Wetters'
+                            )
+                        ]
+                    )
+                ],
+                style={
+                    'margin': 40
+                }
             ),
             dbc.Row(
                 [
@@ -90,14 +107,17 @@ app.layout = dbc.Container(
                         [
                             html.Div(
                                 dcc.Markdown(
-                                    'Wählen Sie aus, ob Sie mehr über den Niederschlag oder die Temperatur in der Schweiz wissen möchten.'
+                                    '**BEDIENHINWEIS:** Wählen Sie aus, ob Sie die Temperatur- oder Niederschlagsentwicklung in der Schweiz betrachten möchten.',
+                                    style={
+                                        'font-size': 12
+                                    }
                                 )
                             )
                         ]
                     ),
                 ],
                 style={
-                    'margin': 20
+                    'margin': 30
                 }
             ),
             dbc.Row(
@@ -123,20 +143,23 @@ app.layout = dbc.Container(
                                     updatemode='drag'
                                 )
                             )
-                        ], width=8
+                        ], width=10
                     ),
                     dbc.Col(
                         [
                             html.Div(
                                 dcc.Markdown(
-                                    'Wählen Sie aus, von welchem Jahr Sie die Temperatur oder den Niederschlag in der Schweiz wissen möchten.'
+                                    '**BEDIENHINWEIS:** Wählen Sie das gewünschte Jahr aus.',
+                                    style={
+                                        'font-size': 12
+                                    }
                                 )
                             )
                         ]
                     ),
                 ],
                 style={
-                    'margin': 20
+                    'margin': 30
                 }
             ),
             dbc.Row(
@@ -151,29 +174,32 @@ app.layout = dbc.Container(
                                     max=12,
                                     value=1,
                                     step=1,
-                                    marks={'1': 'Januar',
-                                           '2': 'Februar',
+                                    marks={'1': 'Jan',
+                                           '2': 'Feb',
                                            '3': 'März',
-                                           '4': 'April',
+                                           '4': 'Apr',
                                            '5': 'Mai',
                                            '6': 'Juni',
                                            '7': 'Juli',
-                                           '8': 'August',
-                                           '9': 'September',
-                                           '10': 'Oktober',
-                                           '11': 'November',
-                                           '12': 'Dezember'
+                                           '8': 'Aug',
+                                           '9': 'Sep',
+                                           '10': 'Okt',
+                                           '11': 'Nov',
+                                           '12': 'Dez'
                                            },
                                     updatemode=('drag')
                                 )
                             )
-                        ], width=8
+                        ], width=10
                     ),
                     dbc.Col(
                         [
                             html.Div(
                                 dcc.Markdown(
-                                    'Wählen Sie aus, für welchen Monat in oben gewähltem Jahr Sie die Temperatur oder der Niederschlag interessiert.'
+                                    '**BEDIENHINWEIS:** Wählen Sie den gewünschten Monat aus.',
+                                    style={
+                                        'font-size': 12
+                                    }
                                 )
                             )
                         ]
@@ -181,23 +207,6 @@ app.layout = dbc.Container(
                 ],
                 style={
                     'margin': 20
-                }
-            ),
-            dbc.Row(
-                [
-                    dbc.Col(
-                        [
-                            html.Div(
-                                dcc.Markdown(
-                                    'Auf der Karte unten, finden Sie das ausgewählte Wetter (Temperatur oder Niederschlag) visualisiert über '
-                                    'der ganzen Schweiz, für den Monat und das Jahr, welches Sie ausgewählt haben.'
-                                )
-                            )
-                        ]
-                    ),
-                ],
-                style={
-                    'margin': 40
                 }
             ),
             dbc.Row(
@@ -215,7 +224,46 @@ app.layout = dbc.Container(
                             )
                         ]
                     )
-                ]
+                ],
+                style={
+                    'margin': 0
+                }
+            ),
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [
+                            html.Div(
+                                dcc.Markdown('''
+                                **KARTENERKLÄRUNG**  
+                                Auf der Karte obigen, finden Sie das ausgewählte Wetter (Temperatur oder Niederschlag) visualisiert über 
+                                der ganzen Schweiz, für den Monat und das Jahr, welches Sie ausgewählt haben.  
+
+                                Unter der Karte, finden Sie eine Skala, auf der Sie den Farben genaue Werte zuordnen können (z. B. dunkelrot=30°C, 
+                                oder dunkelviolett=400 mm Regen pro Monat).
+                        '''
+                                             )
+                            )
+                        ]
+                    ),
+                ],
+                style={
+                    'margin': 0
+                }
+            ),
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [
+                            html.H2(
+                                'Wetterübersicht nach Ortschaft'
+                            )
+                        ]
+                    )
+                ],
+                style={
+                    'margin': 40
+                }
             ),
             dbc.Row(
                 [
@@ -234,8 +282,11 @@ app.layout = dbc.Container(
                         [
                             html.Div(
                                 dcc.Markdown(
-                                    'Wählen Sie eine Gemeinde aus, für welche Sie der Verlauf der Temperatur und der Niederschlagmenge '
-                                    'während des Jahres 1961 bis 2019 interessiert.'
+                                    '**BEDIENHINWEIS:** Wählen Sie eine Ortschaft aus, für welche Sie den Temperatur- und Niederschlagsmengenverlauf der Jahre 1961 - 2019 wissen möchten.'
+                                    'In den folgenden vier Plots, können sie mittels Anwählen eines bestimmten Gebietes, dieses Gebiet vergrössern.',
+                                    style={
+                                        'font-size': 12
+                                    }
                                 )
                             )
                         ]
@@ -249,11 +300,11 @@ app.layout = dbc.Container(
                 [
                     dbc.Col(
                         [
-                           html.Div(
-                               html.H2(
-                                   'Temperatur'
-                               )
-                           )
+                            html.Div(
+                                html.H3(
+                                    'Temperatur'
+                                )
+                            )
                         ]
                     )
                 ]
@@ -272,9 +323,16 @@ app.layout = dbc.Container(
                     dbc.Col(
                         [
                             html.Div(
-                                dcc.Markdown(
-                                    'Hier ist die Erklärung zum ersten Plot'
-                                )
+                                dcc.Markdown('''
+                                    **ERKLÄRUNG**  
+                                    * Punkte: Ein Punkt repräsentiert einen die Temperatur in einem Monat
+                                    * Gezackte Linie: Diese Linie, zeigt immer die durchschnittliche Temperatur der letzten 12 Monate an
+                                    * Gerade: Diese Linie zeigt den Trend den Temperatur
+                                    ''',
+                                             style={
+                                                 'font-size': 14
+                                             }
+                                             )
                             )
                         ]
                     ),
@@ -298,9 +356,16 @@ app.layout = dbc.Container(
                     dbc.Col(
                         [
                             html.Div(
-                                dcc.Markdown(
-                                    'Hier ist die Erklärung zum zweiten Plot'
-                                )
+                                dcc.Markdown('''
+                                                **ERKLÄRUNG**  
+                                                Die Abweichung eines Balkens von der Nulllinie, zeigt die Abweichung der Temperatur 
+                                                von der durchschnittlichen Temperatur in den Jahren 1961 - 2019 
+                                                in diesem Jahr in dem der Balken steht an.
+                                                ''',
+                                             style={
+                                                 'font-size': 14
+                                             }
+                                             )
                             )
                         ]
                     )
@@ -308,6 +373,19 @@ app.layout = dbc.Container(
                 style={
                     'margin': 10
                 }
+            ),
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [
+                            html.Div(
+                                html.H3(
+                                    'Niederschlag'
+                                )
+                            )
+                        ]
+                    )
+                ]
             ),
             dbc.Row(
                 [
@@ -324,9 +402,16 @@ app.layout = dbc.Container(
                     dbc.Col(
                         [
                             html.Div(
-                                dcc.Markdown(
-                                    'Hier ist die Erklärung zum dritten Plot'
-                                )
+                                dcc.Markdown('''
+                                **ERKLÄRUNG**  
+                                * Punkte: Ein Punkt repräsentiert einen die Temperatur in einem Monat
+                                * Gezackte Linie: Diese Linie, zeigt immer die durchschnittliche Temperatur der letzten 12 Monate an
+                                * Gerade: Diese Linie zeigt den Trend den Temperatur
+                                    ''',
+                                             style={
+                                                 'font-size': 14
+                                             }
+                                             )
                             )
                         ]
                     )
@@ -334,53 +419,71 @@ app.layout = dbc.Container(
                 style={
                     'margin': 10
                 }
-            ),            dbc.Row(
-                [
-                    dbc.Col(
-                        [
-                            html.Div(
-                                dcc.Graph(
-                                    id='Change_Prec'
-                                )
+            ), dbc.Row(
+            [
+                dbc.Col(
+                    [
+                        html.Div(
+                            dcc.Graph(
+                                id='Change_Prec'
                             )
-                        ],
-                        width=10
-                    ),
-                    dbc.Col(
-                        [
-                            html.Div(
-                                dcc.Markdown(
-                                    'Hier ist die Erklärung zum vierten Plot'
-                                )
-                            )
-                        ]
-                    )
-                ],
-                style={
-                    'margin': 10
-                }
-            ),
+                        )
+                    ],
+                    width=10
+                ),
+                dbc.Col(
+                    [
+                        html.Div(
+                            dcc.Markdown('''
+                                    **ERKLÄRUNG**  
+                                    Die Abweichung eines Balkens von der Nulllinie, zeigt die Abweichung der Niederschlagsmenge 
+                                    von der durchschnittlichen Menge des Niederschlags in den Jahren 1961 - 2019 
+                                    in diesem Jahr in dem der Balken steht an.
+                                    ''',
+                                         style={
+                                             'font-size': 14
+                                         }
+                                         )
+                        )
+                    ]
+                )
+            ],
+            style={
+                'margin': 10
+            }
+        ),
             dbc.Row(
                 [
                     dbc.Col(
                         [
                             html.Div(
-                                dcc.Markdown(
-                                    'Quellenangaben'
-                                )
+                                dcc.Markdown('''
+                                    **Quellenangaben:**  
+
+                                    * Die Niederschlags- und Temperaturdaten stammen von [MeteoSchweiz](https://www.meteoschweiz.admin.ch/home.html?tab=overview).  
+                                    * Die Namen aller Schweizer Städte stammen von der Webseite [Cadastre](https://www.cadastre.ch/de/services/service/registry/plz.html) der Schweizerischen Eidgenossenschaft.  
+
+                                    **Mitwirkende**  
+
+                                    * Christopher Frame, Lukas Reber, Eugen Cuic, Cédric Künzi                                    
+                                    * Studenten Studiengang BSc Data Science der Fachhochschule Nordwestschweiz
+                                    ''',
+                                             style={
+                                                 'font-size': 12
+                                             }
+                                             )
                             )
                         ]
                     ),
                 ],
                 style={
-                    'margin': 20
+                    'margin': 30
                 }
             ),
         ]
     )
     ]
 )
-
 
 
 # Define where the output goes and from where the input comes in
@@ -435,7 +538,7 @@ def create_graph(city):
     if city:
         # Choose the coordinate, look if a city already has been entered
         # Change the name of the city into coordinates (the data to do this is stored in the database)
-        Sql_query = """SELECT Ortschaftsname, Longitude, Latitude FROM coordinates WHERE Ortschaftsname = %s;"""
+        Sql_query = """SELECT Longitude, Latitude FROM coordinates WHERE Ortschaftsname = %s;"""
         # Evoke Connection
         con = database_connection.connect()
         get_coordinates = pd.read_sql(Sql_query, con=con, params=(city,))
@@ -447,27 +550,30 @@ def create_graph(city):
         df = get_city_weather.get_temp(longitude, latitude)
 
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=df.index, y=df['temperatur'], mode='markers', name="Alle Messwerte"))
         fig.add_trace(
-            go.Scatter(x=df.index, y=df.rolling(12).mean()['temperatur'], mode='lines', name="Jahresdurchschnitt",
+            go.Scatter(x=df.index, y=round(df['temperatur'], 2), mode='markers', name="Alle Messwerte", opacity=0.6))
+        fig.add_trace(
+            go.Scatter(x=df.index, y=round(df.rolling(12).mean()['temperatur'], 2), mode='lines',
+                       name="Jahresdurchschnitt",
                        hoverinfo='skip'))
 
         # trend Line von scatter berechnen
-        help_fig = px.scatter(df, x=df.index, y=df["temperatur"],  trendline="ols")
+        help_fig = px.scatter(df, x=df.index, y=round(df["temperatur"], 2), trendline="ols")
         x_trend = help_fig["data"][1]['x']
         y_trend = help_fig["data"][1]['y']
 
         # Linie hinzufügen
-        fig.add_trace(go.Line(x=x_trend, y=y_trend, name="Trendlinie"))
-
+        fig.add_trace(go.Line(x=x_trend, y=round(y_trend, 2), name="Trendlinie"))
 
         # Define Text for Hover
         fig.update_traces(hovertemplate='Jahr: %{x} <br>Temperatur: %{y}\u00B0C')
 
         # plotly figure layout
         fig.update_layout(template='seaborn',
-                          title="Monatliche Durchschnittstemperatur",
-                          xaxis_title='Zeit in Monaten', yaxis_title='Temperatur in \u00B0C')
+                          title={
+                              'text': "Monatliche Durchschnittstemperatur",
+                              'xanchor': 'left'},
+                          xaxis_title='Zeit in Monaten', yaxis_title='Temperatur in \u00B0C', legend_orientation="h")
 
         # Close DB connection
         con.close()
@@ -478,7 +584,6 @@ def create_graph(city):
     return fig
 
 
-
 @app.callback(
     Output('Change_Temp', 'figure'),
     [Input('cities-dropdown', 'value')])
@@ -486,7 +591,7 @@ def create_graph(city):
     if city:
         # Choose the coordinate, look if a city already has been entered
         # Change the name of the city into coordinates (the data to do this is stored in the database)
-        Sql_query = """SELECT Ortschaftsname, Longitude, Latitude FROM coordinates WHERE Ortschaftsname = %s;"""
+        Sql_query = """SELECT Longitude, Latitude FROM coordinates WHERE Ortschaftsname = %s;"""
         # Evoke Connection
         con = database_connection.connect()
         get_coordinates = pd.read_sql(Sql_query, con=con, params=(city,))
@@ -507,11 +612,11 @@ def create_graph(city):
         pos_value = df[(df >= 0).all(axis=1)]
         neg_value = df[(df < 0).all(axis=1)]
 
-        fig.add_trace(go.Bar(x=pos_value.index, y=pos_value['temperatur'],
+        fig.add_trace(go.Bar(x=pos_value.index, y=round(pos_value['temperatur'], 2),
                              marker_color='crimson',
                              name=''
                              ))
-        fig.add_trace(go.Bar(x=neg_value.index, y=neg_value['temperatur'],
+        fig.add_trace(go.Bar(x=neg_value.index, y=round(neg_value['temperatur'], 2),
                              marker_color='blue',
                              name=''
                              ))
@@ -531,7 +636,6 @@ def create_graph(city):
     return fig
 
 
-
 # Display the graph of a city
 @app.callback(
     Output('Scatter_Prec', 'figure'),
@@ -540,7 +644,7 @@ def create_graph(city):
     if city:
         # Choose the coordinate, look if a city already has been entered
         # Change the name of the city into coordinates (the data to do this is stored in the database)
-        Sql_query = """SELECT Ortschaftsname, Longitude, Latitude FROM coordinates WHERE Ortschaftsname = %s;"""
+        Sql_query = """SELECT Longitude, Latitude FROM coordinates WHERE Ortschaftsname = %s;"""
         # Evoke Connection
         con = database_connection.connect()
         get_coordinates = pd.read_sql(Sql_query, con=con, params=(city,))
@@ -552,25 +656,28 @@ def create_graph(city):
         df = get_city_weather.get_precipitation(longitude, latitude)
 
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=df.index, y=df['Niederschlag'], mode='markers', name="Alle Messwerte"))
-        fig.add_trace(go.Scatter(x=df.index, y=df.rolling(12).mean()['Niederschlag'], mode='lines', name="Jahresdurchschnitt"))
+        fig.add_trace(
+            go.Scatter(x=df.index, y=round(df['Niederschlag'], 2), mode='markers', name="Alle Messwerte", opacity=0.6))
+        fig.add_trace(go.Scatter(x=df.index, y=round(df.rolling(12).mean()['Niederschlag'], 2), mode='lines',
+                                 name="Jahresdurchschnitt"))
 
         # trend Line von scatter berechnen
-        help_fig = px.scatter(df, x=df.index, y="Niederschlag",  trendline="ols")
+        help_fig = px.scatter(df, x=df.index, y=round(df["Niederschlag"], 2), trendline="ols")
         x_trend = help_fig["data"][1]['x']
         y_trend = help_fig["data"][1]['y']
 
         # Linie hinzufügen
-        fig.add_trace(go.Line(x=x_trend, y=y_trend, name="Trendlinie", ))
-
+        fig.add_trace(go.Line(x=x_trend, y=round(y_trend, 2), name="Trendlinie", ))
 
         # Adjust Hover Text
         fig.update_traces(hovertemplate='Jahr: %{x} <br>Niederschlag: %{y}mm')
 
         # plotly figure layout
         fig.update_layout(template='seaborn',
-                          title="Monatlicher Niederschlag",
-                          xaxis_title='Zeit in Monaten', yaxis_title='Niederschlag in mm')
+                          title={
+                              'text': "Monatlicher Niederschlag",
+                              'xanchor': 'left'},
+                          xaxis_title='Zeit in Monaten', yaxis_title='Niederschlag in mm', legend_orientation="h")
 
         # Close DB connection
         con.close()
@@ -581,7 +688,6 @@ def create_graph(city):
     return fig
 
 
-
 @app.callback(
     Output('Change_Prec', 'figure'),
     [Input('cities-dropdown', 'value')])
@@ -589,7 +695,7 @@ def create_graph(city):
     if city:
         # Choose the coordinate, look if a city already has been entered
         # Change the name of the city into coordinates (the data to do this is stored in the database)
-        Sql_query = """SELECT Ortschaftsname, Longitude, Latitude FROM coordinates WHERE Ortschaftsname = %s;"""
+        Sql_query = """SELECT Longitude, Latitude FROM coordinates WHERE Ortschaftsname = %s;"""
         # Evoke Connection
         con = database_connection.connect()
         get_coordinates = pd.read_sql(Sql_query, con=con, params=(city,))
@@ -611,11 +717,11 @@ def create_graph(city):
         pos_value = df[(df >= 0).all(axis=1)]
         neg_value = df[(df < 0).all(axis=1)]
 
-        fig.add_trace(go.Bar(x=pos_value.index, y=pos_value['Niederschlag'],
+        fig.add_trace(go.Bar(x=pos_value.index, y=round(pos_value['Niederschlag'], 2),
                              marker_color='crimson',
                              name=''
                              ))
-        fig.add_trace(go.Bar(x=neg_value.index, y=neg_value['Niederschlag'],
+        fig.add_trace(go.Bar(x=neg_value.index, y=round(neg_value['Niederschlag'], 2),
                              marker_color='blue',
                              name=''
                              ))
@@ -634,7 +740,6 @@ def create_graph(city):
 
     return fig
 
-# TODO Quellenangabe
 
 # Run the code in the browser
 if __name__ == '__main__':
