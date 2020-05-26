@@ -552,7 +552,7 @@ def create_graph(city):
         longitude = get_coordinates['Longitude']
         longitude = np.asarray(longitude[0])
 
-        df = get_city_weather_Dash.get_temp(longitude, latitude)
+        df = get_city_weather.get_temp(longitude, latitude)
 
         fig = go.Figure()
         fig.add_trace(
@@ -597,7 +597,7 @@ def create_graph(city):
         longitude = get_coordinates['Longitude']
         longitude = np.asarray(longitude[0])
 
-        df = get_city_weather_Dash.get_temp(longitude, latitude)
+        df = get_city_weather.get_temp(longitude, latitude)
         df['temperatur'] = df['temperatur'] - float(df.mean())
 
         # Group by value per year
@@ -650,7 +650,7 @@ def create_graph(city):
         longitude = get_coordinates['Longitude']
         longitude = np.asarray(longitude[0])
 
-        df = get_city_weather_Dash.get_precipitation(longitude, latitude)
+        df = get_city_weather.get_precipitation(longitude, latitude)
 
         fig = go.Figure()
         fig.add_trace(
@@ -694,7 +694,7 @@ def create_graph(city):
         longitude = get_coordinates['Longitude']
         longitude = np.asarray(longitude[0])
 
-        df = get_city_weather_Dash.get_precipitation(longitude, latitude)
+        df = get_city_weather.get_precipitation(longitude, latitude)
 
         df['Niederschlag'] = df['Niederschlag'] - float(df.mean())
 
