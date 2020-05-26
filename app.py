@@ -25,6 +25,15 @@ database_connection = sqlalchemy.create_engine('mysql+mysqlconnector://{0}:{1}@{
                                                format(database_username, database_password,
                                                       database_ip, database_name))
 
+# Evoke Connection
+con = database_connection.connect()
+
+# Select the needed columns and put them in a pandas dataframe
+select_coordinates = pd.read_sql('SELECT Ortschaftsname, Longitude, Latitude FROM coordinates', con=con)
+
+# Close the database connection
+con.close()
+
 # Create a dash object and add a sylesheet for making the layout of the app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -58,11 +67,16 @@ app.layout = dbc.Container(
                                     Auf dieser Webseite finden Sie Grafiken, welche den Klimawandel visualisieren und auf welcher Sie 
                                     Informationen über das Klima in der Schweiz finden können.  
 
-                                    Speziell richtet sich diese Seite an Weinbauern oder Personen die sich für Wein interessieren und welche 
-                                    Auswirkungen das Klima auf Weintrauben hat. 
-                                    Im folgenden wird die Auswirkung der Klimaveränderung auf den Wein/Weintrauben kurz beschrieben:  
+                                    Die Visualisierungen die Sie hier finden, sind ergänzend zu einer Story über das Klima und den Wein. Die 
+                                    Story finden Sie mit folgendem Link: [Warum ein warmer Sommer zu einem tränenreichen Herbst führt](https://medium.com/@lukasreber/warum-ein-warmer-sommer-zu-einem-tr%C3%A4nenreichen-herbst-f%C3%BChrt-f74960db12ae)
 
-                                    *Kurzerklärung*
+                                    Kurz zusammenfassend führen höhere Temperaturen zu einem höheren Zuckergehalt in den Weintrauben. 
+                                    Ein höherer Zuckergehalt wiederum, führt zu einem höheren Alkoholgehalt später im Wein.  
+
+                                    Wie Sie aus den nachfolgenden Grafiken entnehmen können, wird das Klima wärmer, was zu einem höheren Alkoholgehalt in unseren 
+                                    Weinen führen kann. (Für Details zum Wein verweisen wir Sie wieder auf obigen Link, wo das genau erklärt ist).  
+
+                                    Im folgenden können Sie sich die Grafiken ansehen und sich selber eine Meinung über das Klima in der Schweiz bilden.
                                     ''',
                                              style={
                                                  'margin': 30
@@ -78,7 +92,7 @@ app.layout = dbc.Container(
                     dbc.Col(
                         [
                             html.H2(
-                                'Gesamtübersicht Schweiz des Wetters'
+                                'Gesamtübersicht des Wetters in der Schweiz'
                             )
                         ]
                     )
@@ -282,8 +296,9 @@ app.layout = dbc.Container(
                         [
                             html.Div(
                                 dcc.Markdown(
-                                    '**BEDIENHINWEIS:** Wählen Sie eine Ortschaft aus, für welche Sie den Temperatur- und Niederschlagsmengenverlauf der Jahre 1961 - 2019 wissen möchten.'
-                                    'In den folgenden vier Plots, können sie mittels Anwählen eines bestimmten Gebietes, dieses Gebiet vergrössern.',
+                                    '**BEDIENHINWEIS:** Wählen Sie eine Ortschaft aus, für welche Sie den Temperatur- und Niederschlagsmengenverlauf der Jahre 1961 - 2019 wissen möchten. '
+                                    'In den folgenden vier Plots, können sie mittels Anwählen eines bestimmten Ausschnitts der Grafik, diesen Ausschnitt vergrössern. '
+                                    'Indem Sie bei der Legende eine Linie anwählen, wird nur diese Linie dargestellt (Grafiken 1 und 3).',
                                     style={
                                         'font-size': 12
                                     }
@@ -318,16 +333,16 @@ app.layout = dbc.Container(
                                     id='Scatter_Temp'
                                 )
                             )
-                        ], width=10
+                        ], width=9
                     ),
                     dbc.Col(
                         [
                             html.Div(
                                 dcc.Markdown('''
                                     **ERKLÄRUNG**  
-                                    * Punkte: Ein Punkt repräsentiert einen die Temperatur in einem Monat
-                                    * Gezackte Linie: Diese Linie, zeigt immer die durchschnittliche Temperatur der letzten 12 Monate an
-                                    * Gerade: Diese Linie zeigt den Trend den Temperatur
+                                    *Punkte:* Ein Punkt repräsentiert einen die Temperatur in einem Monat  
+
+                                    *Gezackte Linie:* Diese Linie, zeigt immer die durchschnittliche Temperatur der letzten 12 Monate an
                                     ''',
                                              style={
                                                  'font-size': 14
@@ -351,7 +366,7 @@ app.layout = dbc.Container(
                                 )
                             )
                         ],
-                        width=10
+                        width=9
                     ),
                     dbc.Col(
                         [
@@ -397,17 +412,17 @@ app.layout = dbc.Container(
                                 )
                             )
                         ],
-                        width=10
+                        width=9
                     ),
                     dbc.Col(
                         [
                             html.Div(
                                 dcc.Markdown('''
                                 **ERKLÄRUNG**  
-                                * Punkte: Ein Punkt repräsentiert einen die Temperatur in einem Monat
-                                * Gezackte Linie: Diese Linie, zeigt immer die durchschnittliche Temperatur der letzten 12 Monate an
-                                * Gerade: Diese Linie zeigt den Trend den Temperatur
-                                    ''',
+                                *Punkte:* Ein Punkt repräsentiert einen die Temperatur in einem Monat  
+
+                                *Gezackte Linie:* Diese Linie, zeigt immer die durchschnittliche Temperatur der letzten 12 Monate an  
+                                ''',
                                              style={
                                                  'font-size': 14
                                              }
@@ -429,7 +444,7 @@ app.layout = dbc.Container(
                             )
                         )
                     ],
-                    width=10
+                    width=9
                 ),
                 dbc.Col(
                     [
@@ -485,7 +500,6 @@ app.layout = dbc.Container(
     ]
 )
 
-
 # Define where the output goes and from where the input comes in
 #For changing the map if the client wants to see another year or month
 @app.callback(
@@ -510,12 +524,6 @@ def update_figure(selected_year, selected_month, weather):
 
 def dropdown_values(one):
 
-    # Evoke Connection
-    con = database_connection.connect()
-
-    # Select the needed columns and put them in a pandas dataframe
-    select_coordinates = pd.read_sql('SELECT Ortschaftsname, Longitude, Latitude FROM coordinates', con=con)
-
     #Get the names of the cities out of the database
     cities = select_coordinates['Ortschaftsname']
 
@@ -524,9 +532,6 @@ def dropdown_values(one):
 
     for city in cities:
         cities_dropdown.append({'label': city, 'value': city})
-
-    # Close the database connection
-    con.close()
 
     return cities_dropdown
 
@@ -547,23 +552,15 @@ def create_graph(city):
         longitude = get_coordinates['Longitude']
         longitude = np.asarray(longitude[0])
 
-        df = get_city_weather.get_temp(longitude, latitude)
+        df = get_city_weather_Dash.get_temp(longitude, latitude)
 
         fig = go.Figure()
         fig.add_trace(
-            go.Scatter(x=df.index, y=round(df['temperatur'], 2), mode='markers', name="Alle Messwerte", opacity=0.6))
+            go.Scatter(x=df.index, y=df['temperatur'].round(2), mode='markers', name="Alle Messwerte", opacity=0.6))
         fig.add_trace(
-            go.Scatter(x=df.index, y=round(df.rolling(12).mean()['temperatur'], 2), mode='lines',
+            go.Scatter(x=df.index, y=df.rolling(12).mean()['temperatur'].round(2), mode='lines',
                        name="Jahresdurchschnitt",
                        hoverinfo='skip'))
-
-        # trend Line von scatter berechnen
-        help_fig = px.scatter(df, x=df.index, y=round(df["temperatur"], 2), trendline="ols")
-        x_trend = help_fig["data"][1]['x']
-        y_trend = help_fig["data"][1]['y']
-
-        # Linie hinzufügen
-        fig.add_trace(go.Line(x=x_trend, y=round(y_trend, 2), name="Trendlinie"))
 
         # Define Text for Hover
         fig.update_traces(hovertemplate='Jahr: %{x} <br>Temperatur: %{y}\u00B0C')
@@ -572,8 +569,8 @@ def create_graph(city):
         fig.update_layout(template='seaborn',
                           title={
                               'text': "Monatliche Durchschnittstemperatur",
-                              'xanchor': 'left'},
-                          xaxis_title='Zeit in Monaten', yaxis_title='Temperatur in \u00B0C', legend_orientation="h")
+                              'xanchor': 'right'},
+                          xaxis_title='Zeit in Monaten', yaxis_title='Temperatur in \u00B0C', legend=dict(x=0, y=-0.3))
 
         # Close DB connection
         con.close()
@@ -600,7 +597,7 @@ def create_graph(city):
         longitude = get_coordinates['Longitude']
         longitude = np.asarray(longitude[0])
 
-        df = get_city_weather.get_temp(longitude, latitude)
+        df = get_city_weather_Dash.get_temp(longitude, latitude)
         df['temperatur'] = df['temperatur'] - float(df.mean())
 
         # Group by value per year
@@ -653,21 +650,14 @@ def create_graph(city):
         longitude = get_coordinates['Longitude']
         longitude = np.asarray(longitude[0])
 
-        df = get_city_weather.get_precipitation(longitude, latitude)
+        df = get_city_weather_Dash.get_precipitation(longitude, latitude)
 
         fig = go.Figure()
         fig.add_trace(
-            go.Scatter(x=df.index, y=round(df['Niederschlag'], 2), mode='markers', name="Alle Messwerte", opacity=0.6))
-        fig.add_trace(go.Scatter(x=df.index, y=round(df.rolling(12).mean()['Niederschlag'], 2), mode='lines',
+            go.Scatter(x=df.index, y=df['Niederschlag'].round(2), mode='markers', name="Alle Messwerte", opacity=0.6))
+        fig.add_trace(go.Scatter(x=df.index, y=df.rolling(12).mean()['Niederschlag'].round(2), mode='lines',
                                  name="Jahresdurchschnitt"))
 
-        # trend Line von scatter berechnen
-        help_fig = px.scatter(df, x=df.index, y=round(df["Niederschlag"], 2), trendline="ols")
-        x_trend = help_fig["data"][1]['x']
-        y_trend = help_fig["data"][1]['y']
-
-        # Linie hinzufügen
-        fig.add_trace(go.Line(x=x_trend, y=round(y_trend, 2), name="Trendlinie", ))
 
         # Adjust Hover Text
         fig.update_traces(hovertemplate='Jahr: %{x} <br>Niederschlag: %{y}mm')
@@ -676,8 +666,8 @@ def create_graph(city):
         fig.update_layout(template='seaborn',
                           title={
                               'text': "Monatlicher Niederschlag",
-                              'xanchor': 'left'},
-                          xaxis_title='Zeit in Monaten', yaxis_title='Niederschlag in mm', legend_orientation="h")
+                              'xanchor': 'right'},
+                          xaxis_title='Zeit in Monaten', yaxis_title='Niederschlag in mm', legend=dict(x=0, y=-0.3))
 
         # Close DB connection
         con.close()
@@ -704,7 +694,7 @@ def create_graph(city):
         longitude = get_coordinates['Longitude']
         longitude = np.asarray(longitude[0])
 
-        df = get_city_weather.get_precipitation(longitude, latitude)
+        df = get_city_weather_Dash.get_precipitation(longitude, latitude)
 
         df['Niederschlag'] = df['Niederschlag'] - float(df.mean())
 
@@ -739,7 +729,6 @@ def create_graph(city):
         fig = go.Figure()
 
     return fig
-
 
 # Run the code in the browser
 if __name__ == '__main__':
