@@ -46,6 +46,23 @@ app.layout = dbc.Container(
                     dbc.Col(
                         [
                             html.Div(
+                                dcc.Markdown(
+                                    'Falls ein Fehler auftaucht laden Sie die Webseite bitte neu'
+                                ),
+                                style={
+                                    'font-size': 28,
+                                    'color': 'red',
+                                }
+                            )
+                        ]
+                    )
+                ]
+            ),
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [
+                            html.Div(
                                 html.H1(
                                     'Webseite des Projektes Climate Change des Studiengangs Data Science der FHNW',
                                     style={
