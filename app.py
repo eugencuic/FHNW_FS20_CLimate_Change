@@ -12,7 +12,8 @@ import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import os
 
-#Code für den Server
+# Code für den Server
+# Christopher Frame, Eugen Cuic, Lukas Reber, Cédric Künzi
 
 # Create the data for connecting to the database
 database_username = 'climate_change'
@@ -359,7 +360,7 @@ app.layout = dbc.Container(
                                     **ERKLÄRUNG**  
                                     *Punkte:* Ein Punkt repräsentiert einen die Temperatur in einem Monat  
 
-                                    *Gezackte Linie:* Diese Linie, zeigt immer die durchschnittliche Temperatur der letzten 12 Monate an
+                                    *Orange Linie:* Diese Linie, zeigt immer die durchschnittliche Temperatur der letzten 12 Monate an
                                     ''',
                                              style={
                                                  'font-size': 14
@@ -438,7 +439,7 @@ app.layout = dbc.Container(
                                 **ERKLÄRUNG**  
                                 *Punkte:* Ein Punkt repräsentiert einen die Temperatur in einem Monat  
 
-                                *Gezackte Linie:* Diese Linie, zeigt immer die durchschnittliche Temperatur der letzten 12 Monate an  
+                                *Orange Linie:* Diese Linie, zeigt immer die durchschnittliche Temperatur der letzten 12 Monate an  
                                 ''',
                                              style={
                                                  'font-size': 14
